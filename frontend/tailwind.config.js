@@ -26,7 +26,7 @@ export default {
           "tertiary-container": "#FFD9DD",
           "on-tertiary-container": "#3B0712",
 
-          // Teal-tinted surfaces (never pure white)
+          // Teal-tinted surfaces 
           background: "#F8FDFB",
           "on-background": "#191C1C",
           surface: "#F8FDFB",
@@ -47,13 +47,14 @@ export default {
           "error-container": "#FFDAD6",
           "on-error-container": "#410002",
 
-          // Clinical status extensions (MD3-compatible tonal pairs)
-          success: "#386A20",
-          "success-container": "#B8F397",
-          "on-success-container": "#072100",
-          warning: "#7D5700",
-          "warning-container": "#FFDDB3",
-          "on-warning-container": "#271900",
+          // Clinical status — boosted saturation, hues shifted to
+          // complement the teal/coral brand palette
+          success: "#18915F",
+          "success-container": "#98F5CE",
+          "on-success-container": "#003822",
+          warning: "#BD7B16",
+          "warning-container": "#FFDFA3",
+          "on-warning-container": "#3C2500",
         },
       },
       borderRadius: {

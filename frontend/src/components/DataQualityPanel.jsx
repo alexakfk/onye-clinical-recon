@@ -30,9 +30,9 @@ function textColor(score) {
 }
 
 function strokeClass(score) {
-  if (score >= 80) return "stroke-[#386A20]";
-  if (score >= 50) return "stroke-[#7D5700]";
-  return "stroke-[#B3261E]";
+  if (score >= 80) return "stroke-[#18915F]";
+  if (score >= 50) return "stroke-[#BD7B16]";
+  return "stroke-[#BA1A1A]";
 }
 
 function glowClass(score) {

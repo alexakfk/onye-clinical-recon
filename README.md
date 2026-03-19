@@ -168,3 +168,27 @@ Each prompt follows a consistent pattern (see `ai_client.py` docstring):
 - **Synchronous Anthropic client** – The official Python SDK's sync `messages.create` is called within an async endpoint. For high-throughput, the async client or a thread pool would be preferable.
 - **No RBAC** – A single API key secures all endpoints. A production system would need role-based access control.
 - **Rule-based fallback is conservative** – Without AI, the engine picks the highest-scored source but cannot reason about complex drug interactions.
+
+## What I'd Improve with More Time
+
+- **Persistent storage** – Replace the in-memory cache with PostgreSQL or Redis so reconciliation history, clinician approve/reject decisions, and audit trails survive restarts. This would also enable tracking how often AI suggestions are overridden.
+- **Async Anthropic client** – Swap the synchronous `messages.create` call for the async variant (`AsyncAnthropic`) so the event loop isn't blocked during LLM inference, improving throughput under concurrent requests.
+- **Confidence score calibration** – The rule-based confidence score is a simple linear blend of reliability and recency. A more sophisticated model would weight source agreement (do multiple sources corroborate each other?), clinical severity, and historical accuracy of each source system.
+- **Duplicate record detection** – Add a fuzzy matching layer (e.g., Levenshtein distance on medication names, phonetic matching) to detect when two sources are reporting the same drug with slightly different spellings or formats before reconciliation.
+- **Role-based access control** – Replace the single shared API key with JWT-based auth and user roles (clinician, pharmacist, admin) so approve/reject actions are attributed and permissions are scoped.
+- **Webhook support** – Allow external systems to subscribe to reconciliation events so downstream EHRs can be notified in real-time when a medication record is reconciled.
+- **Expanded clinical safety rules** – The rule-based safety check currently only covers Metformin + low eGFR. A production system would need a broader formulary of drug–condition, drug–drug, and drug–allergy interaction checks.
+- **End-to-end and integration tests** – The current suite covers unit logic and API contracts. I'd add Playwright or Cypress tests for the frontend flows (submit, approve/reject, tab switching) and integration tests that exercise the full AI path with mocked Anthropic responses.
+- **Production frontend build** – Serve the Vite production build (`npm run build`) as static files from the FastAPI backend, eliminating the need for a separate frontend server in deployment.
+
+## Estimated Time Spent
+
+| Phase | Time |
+|---|---|
+| Backend architecture, models, services | ~2 hours |
+| AI integration and prompt engineering | ~1 hour |
+| Frontend dashboard (React + Tailwind) | ~2 hours |
+| Material You design system + Onye branding | ~1.5 hours |
+| Tests (17 unit tests) | ~0.5 hours |
+| Docker, README, project polish | ~0.5 hours |
+| **Total** | **~7.5 hours** |
