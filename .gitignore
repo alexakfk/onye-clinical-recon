@@ -11,4 +11,5 @@ build/
 
 node_modules/
 frontend/dist/
+public/
 .DS_Store
